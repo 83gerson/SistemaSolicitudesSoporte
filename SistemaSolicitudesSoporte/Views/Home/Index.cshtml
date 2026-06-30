@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="jumbotron">
+    <h1>Sistema de Registro de Solicitudes de Soporte Técnico</h1>
+    <p>
+        Esta aplicación permite registrar, consultar y dar seguimiento a
+        solicitudes de soporte técnico de una forma sencilla, aplicando el
+        patrón Modelo&ndash;Vista&ndash;Controlador (MVC).
+    </p>
+</div>
+
+@if (string.IsNullOrEmpty(ViewBag.NombreUsuario))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Identifícate para continuar</h3>
+            @using (Html.BeginForm("GuardarNombre", "Home", FormMethod.Post))
+            {
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label>Tu nombre:</label>
+                    <input type="text" name="nombre" class="form-control" required="required" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h3>Bienvenido(a), @ViewBag.NombreUsuario</h3>
+    <p>
+        @Html.ActionLink("Registrar nueva solicitud", "Create", "Solicitudes", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Ver lista de solicitudes", "Index", "Solicitudes", null, new { @class = "btn btn-default" })
+    </p>
+}

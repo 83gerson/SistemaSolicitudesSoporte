@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SistemaSolicitudesSoporte.Models.Solicitud>
+@{
+    ViewBag.Title = "Lista de Solicitudes";
+}
+
+<h2>Lista de Solicitudes de Soporte</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}
+
+<p>@Html.ActionLink("Registrar nueva solicitud", "Create", null, null, new { @class = "btn btn-success" })</p>
+
+<div class="form-inline" style="margin-bottom:15px;">
+    <label>Categoría:&nbsp;</label>
+    <select id="filtroCategoria" class="form-control">
+        <option value="Todas">Todas</option>
+        @foreach (var c in (SelectList)ViewBag.Categorias)
+        {
+            <option value="@c.Text">@c.Text</option>
+        }
+    </select>
+
+    <label>Estado:&nbsp;</label>
+    <select id="filtroEstado" class="form-control">
+        <option value="Todos">Todos</option>
+        @foreach (var e in (SelectList)ViewBag.Estados)
+        {
+            <option value="@e.Text">@e.Text</option>
+        }
+    </select>
+</div>
+
+<table class="table table-striped" id="tablaSolicitudes">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Fecha de registro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.NombreSolicitante</td>
+                <td>@s.Categoria</td>
+                <td>@s.Estado</td>
+                <td>@s.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@Html.ActionLink("Ver detalle", "Details", new { id = s.Id }, new { @class = "btn btn-info btn-xs" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p id="sinResultados" style="display:none;">
+    No se encontraron solicitudes con los filtros seleccionados.
+</p>
+
+@section Scripts {
+    <script src="~/Scripts/solicitudes.js"></script>
+}
