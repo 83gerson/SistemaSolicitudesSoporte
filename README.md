@@ -23,4 +23,4 @@ Aplicación web desarrollada en ASP.NET MVC (.NET Framework) que permite registr
 Gerson Cordero Calvo
 
 ## Enlace al video
-
+https://drive.google.com/file/d/1r5eTrtB67WpaAWVp2KIZX0Ulu-JCuHHF/view?usp=sharing
